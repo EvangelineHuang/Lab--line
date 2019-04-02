@@ -1,1 +1,42 @@
+<html>
+  <head>
+    <title></title>
+  </head>
+  <script type="text/javascript" src="d3.js">
+  </script>
+  <style>
+    #line{
+      fill:none;
+      stroke:#363813;
+    }
+    .hidden{
+  display:none;
+}
+#tooltip{
+  position:fixed;
+  width:80px;
+  padding:10px;
+  border-radius: 10px;
+  pointer-events:none;
+  background-color:white;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.4);
 
+}
+circle{
+  fill:#c6d6b0;
+  stroke:#363813;
+}
+circle:hover{
+  fill:#848c57;
+}
+    </style>
+  <body>
+    <svg id="line"></svg>
+    <div id="tooltip" class="hidden">
+        <p>Day:<span id="day"></span></p>
+        <p>Grade:<span id="grade"></span></p>
+     </div>
+     <script type="text/javascript" src="lab.js">
+    </script>
+  </body>
+</html>
