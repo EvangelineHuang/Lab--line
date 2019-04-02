@@ -3,7 +3,7 @@ var w=500;
 var h=500;
 var margin={
   left:20,
-  right:20,
+  right:40,
   top:20,
   bottom:20
 }
@@ -15,11 +15,15 @@ grade.then(function(data){
                .domain([0,10])
                .range([h+margin.top,margin.top]);
   var svg=d3.select("#line")
-            .attr("width",w+margin.left+margin.right)
+            .attr("width",w+margin.left+margin.right+200)
             .attr("height",h+margin.top+margin.bottom);
   var line=d3.line()
              .x(function(d){return xScale(d.day);})
              .y(function(d){return yScale(d.grade);});
+  var area=d3.area()
+             .x(function(d){return xScale(d.day);})
+             .y0(function(d){return h})
+             .y1(function(d){return yScale(d.grade);});
   svg.append("path")
      .datum(data[22].quizes)
      .classed("line",true)
@@ -55,4 +59,31 @@ grade.then(function(data){
         .on("mouseout",function(){
          d3.select("#tooltip").classed("hidden",true);
         });
+        svg.append("g")
+          .attr("class","legend")
+          .append("rect")
+          .attr("x",w+20)
+          .attr("y",20)
+          .attr("width",20)
+          .attr("height",20)
+          .attr("fill","#dfe6ea")
+          .text("Area")
+          .on("click",function(){
+            var e=svg.select("path").classed("line")
+            if (e){
+              svg.select("path")
+               .classed("line",false)
+               .datum(data[22].quizes)
+               .attr("d",area)
+               .attr("fill","#dfe6ea");}
+            else
+              {
+                svg.select("path")
+                   .classed("line",true)
+                   .datum(data[22].quizes)
+                   .attr("d",line)
+                   .attr("fill","none");
+              }
+            }
+          )
 },function(err){console.log(err);})
