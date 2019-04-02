@@ -67,7 +67,6 @@ grade.then(function(data){
           .attr("width",20)
           .attr("height",20)
           .attr("fill","#dfe6ea")
-          .text("Area")
           .on("click",function(){
             var e=svg.select("path").classed("line")
             if (e){
@@ -84,6 +83,10 @@ grade.then(function(data){
                    .attr("d",line)
                    .attr("fill","none");
               }
-            }
-          )
+            })
+        svg.append("text")
+           .text("Area")
+           .attr("x",w+50)
+           .attr("y",35)
+
 },function(err){console.log(err);})
