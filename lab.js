@@ -22,7 +22,7 @@ grade.then(function(data){
              .y(function(d){return yScale(d.grade);});
   var area=d3.area()
              .x(function(d){return xScale(d.day);})
-             .y0(function(d){return h})
+             .y0(function(d){return h+20})
              .y1(function(d){return yScale(d.grade);});
   svg.append("path")
      .datum(data[22].quizes)
@@ -38,27 +38,7 @@ grade.then(function(data){
      .classed("yAxis",true)
      .call(yAxis)
      .attr("transform","translate("+(margin.left+margin.right)+",0)");
-     svg.selectAll("circle")
-        .data(data[22].quizes)
-        .enter()
-        .append("circle")
-        .attr("cx",function(d){return xScale(d.day);})
-        .attr("cy",function(d){return yScale(d.grade);})
-        .attr("r","5")
-        .attr("fill","black")
-        .on("mouseover",function(d){
-          d3.select("#tooltip")
-            .style("left",w+margin.left+margin.right)
-            .style("top",20)
-            .select("#grade")
-            .text(d.grade);
-           d3.select("#day")
-             .text(d.day)
-         d3.select("#tooltip").classed("hidden",false);
-        })
-        .on("mouseout",function(){
-         d3.select("#tooltip").classed("hidden",true);
-        });
+
         svg.append("g")
           .attr("class","legend")
           .append("rect")
@@ -66,7 +46,7 @@ grade.then(function(data){
           .attr("y",20)
           .attr("width",20)
           .attr("height",20)
-          .attr("fill","#dfe6ea")
+          .attr("fill","#ecbd8b")
           .on("click",function(){
             var e=svg.select("path").classed("line")
             if (e){
@@ -74,7 +54,7 @@ grade.then(function(data){
                .classed("line",false)
                .datum(data[22].quizes)
                .attr("d",area)
-               .attr("fill","#dfe6ea");}
+               .attr("fill","#ecbd8b");}
             else
               {
                 svg.select("path")
